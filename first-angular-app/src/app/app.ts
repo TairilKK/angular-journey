@@ -11,4 +11,7 @@ import { User } from './user/user';
 })
 export class App {
   users = DUMMY_USERS;
+  onSelectUser(id: string) {
+    console.log('Selected user with id: ' + id);
+  }
 }
