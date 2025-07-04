@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DUMMY_USERS } from './dummy-users';
 import { Header } from './header/header';
 import { User } from './user/user';
 
@@ -9,5 +10,5 @@ import { User } from './user/user';
   styleUrl: './app.css',
 })
 export class App {
-  protected title = 'first-angular-app';
+  users = DUMMY_USERS;
 }
