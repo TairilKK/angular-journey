@@ -1,15 +1,17 @@
 import { Component, Input } from '@angular/core';
+import { NewTask } from './new-task/new-task';
 import { Task } from './task/task';
 
 @Component({
   selector: 'app-tasks',
-  imports: [Task],
+  imports: [Task, NewTask],
   templateUrl: './tasks.html',
   styleUrl: './tasks.css',
 })
 export class Tasks {
   @Input({ required: true }) id!: string;
   @Input({ required: true }) name!: string;
+  isAddingTask = false;
   tasks = [
     {
       id: 't1',
@@ -97,6 +99,14 @@ export class Tasks {
       dueDate: '2025-07-30',
     },
   ];
+
+  onCancelAddTask() {
+    this.isAddingTask = false;
+  }
+
+  onStartAddTask() {
+    this.isAddingTask = true;
+  }
 
   onCompleteTask(id: string) {
     this.tasks = this.tasks.filter((t) => t.id !== id);
