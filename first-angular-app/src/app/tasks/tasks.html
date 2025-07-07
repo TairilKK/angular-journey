@@ -1,6 +1,6 @@
 <section id="tasks">
   @if(isAddingTask){
-  <app-new-task (cancel)="onCancelAddTask()" />
+  <app-new-task (cancel)="onCancelAddTask()" (add)="onAddTask($event)" />
   }
   <header>
     <h2>{{name}}'s Tasks</h2>

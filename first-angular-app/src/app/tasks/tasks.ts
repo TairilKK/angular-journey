@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NewTask } from './new-task/new-task';
 import { Task } from './task/task';
+import { NewTaskData } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -9,7 +10,7 @@ import { Task } from './task/task';
   styleUrl: './tasks.css',
 })
 export class Tasks {
-  @Input({ required: true }) id!: string;
+  @Input({ required: true }) userId!: string;
   @Input({ required: true }) name!: string;
   isAddingTask = false;
   tasks = [
@@ -100,6 +101,17 @@ export class Tasks {
     },
   ];
 
+  onAddTask(taskData: NewTaskData) {
+    this.tasks.push({
+      id: new Date().getTime().toString(),
+      title: taskData.title,
+      summary: taskData.summary,
+      dueDate: taskData.date,
+      userId: this.userId,
+    });
+    this.isAddingTask = false;
+  }
+
   onCancelAddTask() {
     this.isAddingTask = false;
   }
@@ -113,6 +125,6 @@ export class Tasks {
   }
 
   get selectedUserTasks() {
-    return this.tasks.filter((t) => t.userId == this.id);
+    return this.tasks.filter((t) => t.userId == this.userId);
   }
 }
