@@ -9,4 +9,12 @@ import { UserInputComponent } from './user-input/user-input.component';
   imports: [HeaderComponent, UserInputComponent, InvestmentResultsComponent],
   templateUrl: './app.component.html',
 })
-export class AppComponent {}
+export class AppComponent {
+  initialInvestment = 0;
+  annualInvestment = 0;
+  expectedReturn = 5;
+  duration = 10;
+  onCalculate() {
+    console.log('onCalculate');
+  }
+}

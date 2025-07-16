@@ -1,3 +1,9 @@
 <app-header></app-header>
-<app-user-input></app-user-input>
+<app-user-input
+  [initialInvestment]="initialInvestment"
+  [annualInvestment]="annualInvestment"
+  [expectedReturn]="expectedReturn"
+  [duration]="duration"
+  (calculate)="onCalculate()"
+></app-user-input>
 <app-investment-results></app-investment-results>
