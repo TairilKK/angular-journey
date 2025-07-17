@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AnnualInvestment } from './app.model';
 import { HeaderComponent } from './header/header.component';
 import { InvestmentResultsComponent } from './investment-results/investment-results.component';
 import { UserInputComponent } from './user-input/user-input.component';
@@ -10,11 +11,9 @@ import { UserInputComponent } from './user-input/user-input.component';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  initialInvestment = 0;
-  annualInvestment = 0;
-  expectedReturn = 5;
-  duration = 10;
-  onCalculate() {
-    console.log('onCalculate');
+  annualData: AnnualInvestment[] = [];
+  onCalculate(annualData: AnnualInvestment[]) {
+    console.log(annualData);
+    this.annualData = annualData;
   }
 }
