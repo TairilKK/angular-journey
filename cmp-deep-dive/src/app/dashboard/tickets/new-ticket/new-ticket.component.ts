@@ -11,8 +11,7 @@ import { ControlComponent } from '../../../shared/control/control.component';
   styleUrl: './new-ticket.component.css',
 })
 export class NewTicketComponent {
-  onSubmit(titleInput: HTMLInputElement) {
-    console.log('Form submitted');
-    console.log('Title:', titleInput.value);
+  onSubmit(titleInput: string) {
+    console.log('Title:', titleInput);
   }
 }
