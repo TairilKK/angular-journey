@@ -1,6 +1,6 @@
 import {
   Component,
-  ContentChild,
+  contentChild,
   ElementRef,
   inject,
   input,
@@ -23,13 +23,16 @@ export class ControlComponent {
   label = input<string>();
   labelFor = input<string>();
   private element = inject(ElementRef);
-  @ContentChild('input') private content?: ElementRef<
-    HTMLInputElement | HTMLTextAreaElement
-  >;
+  // @ContentChild('input') private content?: ElementRef<
+  //   HTMLInputElement | HTMLTextAreaElement
+  // >;
+  private content =
+    contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');
+
   onClick() {
     // Handle click event
     console.log('Control clicked');
     console.log('Element:', this.element);
-    console.log('Content:', this.content);
+    console.log('Content:', this.content());
   }
 }
