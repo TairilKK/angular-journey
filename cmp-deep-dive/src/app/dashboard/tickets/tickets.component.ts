@@ -11,6 +11,7 @@ import { Ticket } from './tickets.model';
   styleUrl: './tickets.component.css',
 })
 export class TicketsComponent {
+  tickets: Ticket[] = [];
   onAdd(ticketData: { title: string; text: string }) {
     const newTicket: Ticket = {
       id: Math.random().toString(36),
@@ -20,5 +21,10 @@ export class TicketsComponent {
     };
     this.tickets.push(newTicket);
   }
-  tickets: Ticket[] = [];
+  onCloseTicket(ticketId: string) {
+    const ticketIndex = this.tickets.findIndex((t) => t.id === ticketId);
+    if (ticketIndex !== -1) {
+      this.tickets[ticketIndex].status = 'closed';
+    }
+  }
 }
