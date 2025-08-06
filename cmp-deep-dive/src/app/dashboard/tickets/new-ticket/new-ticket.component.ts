@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   OnInit,
+  output,
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -20,6 +21,9 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
   // @ViewChild('form') form?: ElementRef<HTMLFormElement>;
   form = viewChild<ElementRef<HTMLFormElement>>('form');
 
+  // @Output() add = new EventEmitter<{title: string; text: string}>();
+  add = output<{ title: string; text: string }>();
+
   ngOnInit(): void {
     console.log('NgOnInit');
     console.log('Form Element:', this.form()!.nativeElement);
@@ -31,10 +35,7 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit(titleInput: string, textInput: string) {
-    console.log('Title:', titleInput);
-    console.log('Text:', textInput);
-
-    // this.form!.nativeElement.reset();
+    this.add.emit({ title: titleInput, text: textInput });
     this.form()!.nativeElement.reset();
   }
 }
