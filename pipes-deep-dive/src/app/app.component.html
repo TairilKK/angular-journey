@@ -22,6 +22,7 @@
       </div>
     </header>
     <ul>
+      <!-- This pipe is only for showcase it's missmatches index in array -->
       @for (temperature of historicTemperatures | sort; track temperature) {
       <li (click)="onReset($index)">{{ temperature | temp:'cel' }}</li>
       }
