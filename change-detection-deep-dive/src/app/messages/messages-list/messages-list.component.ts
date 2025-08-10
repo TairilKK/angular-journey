@@ -13,7 +13,7 @@ import { MessagesService } from '../messages.service';
 export class MessagesListComponent {
   private messagesService = inject(MessagesService);
 
-  messages$ = this.messagesService.messages$;
+  messages = this.messagesService.allMessages;
 
   get debugOutput() {
     console.log('[MessagesList] "debugOutput" binding re-evaluated.');
