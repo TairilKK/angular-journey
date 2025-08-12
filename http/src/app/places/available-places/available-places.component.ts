@@ -16,6 +16,7 @@ import { PlacesComponent } from '../places.component';
 export class AvailablePlacesComponent implements OnInit {
   places = signal<Place[] | undefined>(undefined);
   isFetching = signal(false);
+  error = signal('');
 
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
@@ -35,6 +36,12 @@ export class AvailablePlacesComponent implements OnInit {
         },
         complete: () => {
           this.isFetching.set(false);
+        },
+        error: (error) => {
+          console.log(error);
+          this.error.set(
+            'Something went wrong fetching available places. Try again later.'
+          );
         },
       });
 
