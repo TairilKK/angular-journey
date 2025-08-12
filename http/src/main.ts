@@ -1,11 +1,13 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 
 import {
+  HttpEventType,
   HttpHandlerFn,
   HttpRequest,
   provideHttpClient,
   withInterceptors,
 } from '@angular/common/http';
+import { tap } from 'rxjs';
 import { AppComponent } from './app/app.component';
 
 function loggingInterceptor(
@@ -16,7 +18,15 @@ function loggingInterceptor(
   //   headers: request.headers.set('X-DEBUG', 'TESTING'),
   // });
   console.log('[Outgoing Request]', request);
-  return next(request);
+  return next(request).pipe(
+    tap({
+      next: (event) => {
+        if (event.type === HttpEventType.Response) {
+          console.log('[Incoming Response]', event);
+        }
+      },
+    })
+  );
 }
 
 bootstrapApplication(AppComponent, {
