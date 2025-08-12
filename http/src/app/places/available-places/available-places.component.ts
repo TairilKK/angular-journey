@@ -1,6 +1,7 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
 import { Place } from '../place.model';
 import { PlacesContainerComponent } from '../places-container/places-container.component';
 import { PlacesComponent } from '../places.component';
@@ -20,9 +21,14 @@ export class AvailablePlacesComponent implements OnInit {
   ngOnInit() {
     const httpCLientSubscribtion = this.httpClient
       .get<{ places: Place[] }>('http://localhost:3000/places')
+      .pipe(
+        map((responseData) => {
+          return responseData.places;
+        })
+      )
       .subscribe({
         next: (responseData) => {
-          this.places.set(responseData.places);
+          this.places.set(responseData);
         },
       });
 
