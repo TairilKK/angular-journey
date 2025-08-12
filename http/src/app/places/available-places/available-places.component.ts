@@ -39,7 +39,6 @@ export class AvailablePlacesComponent implements OnInit {
           );
         })
       )
-
       .subscribe({
         next: (responseData) => {
           this.places.set(responseData);
@@ -55,5 +54,19 @@ export class AvailablePlacesComponent implements OnInit {
     this.destroyRef.onDestroy(() => {
       httpClientSubscribtion.unsubscribe();
     });
+  }
+  onSelectPlace(selectedPlace: Place) {
+    this.httpClient
+      .put('http://localhost:3000/user-places', {
+        placeId: selectedPlace.id,
+      })
+      .subscribe({
+        next: (responseData) => {
+          console.log(responseData);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 }
