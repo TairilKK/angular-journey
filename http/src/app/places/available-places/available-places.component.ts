@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 import { Place } from '../place.model';
 import { PlacesContainerComponent } from '../places-container/places-container.component';
 import { PlacesComponent } from '../places.component';
@@ -28,20 +28,27 @@ export class AvailablePlacesComponent implements OnInit {
       .pipe(
         map((responseData) => {
           return responseData.places;
+        }),
+        catchError((error) => {
+          console.log(error);
+          return throwError(
+            () =>
+              new Error(
+                'Something went wrong fetching available places. Try again later.'
+              )
+          );
         })
       )
+
       .subscribe({
         next: (responseData) => {
           this.places.set(responseData);
         },
+        error: (error: Error) => {
+          this.error.set(error.message);
+        },
         complete: () => {
           this.isFetching.set(false);
-        },
-        error: (error) => {
-          console.log(error);
-          this.error.set(
-            'Something went wrong fetching available places. Try again later.'
-          );
         },
       });
 
