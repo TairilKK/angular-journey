@@ -19,7 +19,7 @@ export class AvailablePlacesComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   ngOnInit() {
-    const httpCLientSubscribtion = this.httpClient
+    const httpClientSubscribtion = this.httpClient
       .get<{ places: Place[] }>('http://localhost:3000/places')
       .pipe(
         map((responseData) => {
@@ -33,7 +33,7 @@ export class AvailablePlacesComponent implements OnInit {
       });
 
     this.destroyRef.onDestroy(() => {
-      httpCLientSubscribtion.unsubscribe();
+      httpClientSubscribtion.unsubscribe();
     });
   }
 }
