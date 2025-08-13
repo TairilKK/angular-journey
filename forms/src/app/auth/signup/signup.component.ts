@@ -8,14 +8,16 @@ import {
   Validators,
 } from '@angular/forms';
 
-function equalPasswords(control: AbstractControl) {
-  const password = control.get('password')?.value;
-  const confirmPassword = control.get('confirmPassword')?.value;
+function equalValue(controlNameA: string, controlNameB: string) {
+  return (control: AbstractControl) => {
+    const valA = control.get(controlNameA)?.value;
+    const valB = control.get(controlNameB)?.value;
 
-  if (password === confirmPassword) {
-    return null;
-  }
-  return { passwordsNotEqual: true };
+    if (valA === valB) {
+      return null;
+    }
+    return { valuesNotEqual: true };
+  };
 }
 
 @Component({
@@ -40,7 +42,7 @@ export class SignupComponent {
         }),
       },
       {
-        validators: [equalPasswords],
+        validators: [equalValue('password', 'confirmPassword')],
       }
     ),
     firstName: new FormControl('', {
