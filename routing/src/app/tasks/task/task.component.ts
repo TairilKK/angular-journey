@@ -24,6 +24,7 @@ export class TaskComponent {
     this.router.navigate(['./'], {
       relativeTo: this.activatedRoute,
       onSameUrlNavigation: 'reload',
+      queryParamsHandling: 'preserve',
     });
   }
 }
