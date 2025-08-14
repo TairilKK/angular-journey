@@ -11,6 +11,7 @@ import { UsersService } from '../users.service';
 })
 export class UserTasksComponent {
   userId = input.required<string>();
+  message = input.required<string>();
   private userService = inject(UsersService);
 
   userName = computed(
