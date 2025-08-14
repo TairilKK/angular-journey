@@ -17,6 +17,14 @@ export class TasksComponent {
 
   private tasksService = inject(TasksService);
   userTasks = computed(() =>
-    this.tasksService.allTasks().filter((task) => task.userId === this.userId())
+    this.tasksService
+      .allTasks()
+      .filter((task) => task.userId === this.userId())
+      .sort((a, b) => {
+        if (this.order() === 'asc') {
+          return a.id > b.id ? -1 : 1;
+        }
+        return a.id < b.id ? -1 : 1;
+      })
   );
 }
